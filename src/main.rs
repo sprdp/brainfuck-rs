@@ -1,10 +1,12 @@
+mod vm;
+mod parser;
+
 use std::env;
 use std::fs::File;
 use std::io::prelude::*;
 
 // Returns file contents as 'String' buffer
 fn read_file(filename: &str) -> String {
-    println!("{}", filename);
     let mut f = File::open(filename).expect("file not found");
     let mut contents = String::new();
     f.read_to_string(&mut contents)
@@ -19,6 +21,7 @@ fn main() {
     } else {
         let src_name = &args[1];
         let contents = read_file(src_name);
-        println!("{}", contents);
+        let mut machine = vm::BFMachine::new();
+        machine.process(parser::parse_src(contents));
     }
 }
