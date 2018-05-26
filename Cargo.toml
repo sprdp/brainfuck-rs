@@ -1,6 +1,14 @@
 [package]
-name = "brainfuck-rs"
+name = "bfrs"
 version = "0.1.0"
-authors = ["supradeep"]
+authors = ["sprdp"]
+
+[lib]
+name = "bfrs"
+path = "src/lib.rs"
+
+[[bin]]
+name = "bfrs"
+path = "src/bin.rs"
 
 [dependencies]

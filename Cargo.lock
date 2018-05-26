@@ -1,4 +1,4 @@
 [[package]]
-name = "brainfuck-rs"
+name = "bfrs"
 version = "0.1.0"
 
