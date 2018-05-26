@@ -49,24 +49,12 @@ impl BFMachine {
     fn execute_instruction(&mut self, ins_type: &Instruction, ins_ptr: usize ) -> usize {
         let mut ret_ins = ins_ptr + 1;
         match ins_type {
-            Instruction::incrPtr => {
-                self.state.dataPtr += 1;
-            }
-            Instruction::decrPtr => {
-                self.state.dataPtr -= 1;
-            }
-            Instruction::incrByte => {
-                self.state.cellArray[self.state.dataPtr] += 1;
-            }
-            Instruction::decrByte => {
-                self.state.cellArray[self.state.dataPtr] -= 1;
-            }
-            Instruction::writeByte => {
-                self.output_stream.write(&[self.state.cellArray[self.state.dataPtr]]);
-            }
-            Instruction::readByte => {
-                self.input_stream.read(&mut [self.state.cellArray[self.state.dataPtr]]);
-            }
+            Instruction::incrPtr => self.state.dataPtr += 1;
+            Instruction::decrPtr => self.state.dataPtr -= 1;
+            Instruction::incrByte => self.state.cellArray[self.state.dataPtr] += 1;
+            Instruction::decrByte => self.state.cellArray[self.state.dataPtr] -= 1;
+            Instruction::writeByte => self.output_stream.write(&[self.state.cellArray[self.state.dataPtr]]);
+            Instruction::readByte => self.input_stream.read(&mut [self.state.cellArray[self.state.dataPtr]]);
             Instruction::jumpStart(jump_addr) => {
                 if self.state.cellArray[self.state.dataPtr] == 0 {
                     ret_ins = *jump_addr;
